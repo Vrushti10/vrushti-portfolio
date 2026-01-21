@@ -5,7 +5,7 @@ import { HiOutlineMail } from "react-icons/hi";
 import { FiDownload } from "react-icons/fi";
 
 // CHANGE filename to your real image inside src/assets
-import profile from "../assets/profile.jpg";
+import profile from "../assets/Profile.jpg";
 import resume from "../assets/VrushtiPatel_Resume.pdf";
 
 export default function Hero() {
