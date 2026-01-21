@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { FiMoon, FiSun } from "react-icons/fi";
+import Lenis from "lenis";
 
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
@@ -29,6 +30,30 @@ export default function App() {
     else root.classList.remove("dark");
     localStorage.setItem("theme", theme);
   }, [theme]);
+
+  // Initialize Lenis smooth scrolling
+  useEffect(() => {
+    const lenis = new Lenis({
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      direction: "vertical",
+      gestureDirection: "vertical",
+      smooth: true,
+      smoothTouch: false,
+      touchMultiplier: 2,
+    });
+
+    const raf = (time) => {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    };
+
+    requestAnimationFrame(raf);
+
+    return () => {
+      lenis.destroy();
+    };
+  }, []);
 
   return (
     <div className="min-h-screen w-full bg-zinc-50 text-zinc-950 dark:bg-[#05070f] dark:text-white overflow-x-hidden">
